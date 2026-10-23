@@ -23,7 +23,7 @@ Run these exact steps from a terminal:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 2. go to this folder
-cd specific-labs-takehome
+cd agent
 
 # 3. install dependencies (creates .venv/ on first run, ~30s)
 uv sync
