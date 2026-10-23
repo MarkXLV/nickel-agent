@@ -1,21 +1,19 @@
-"""Baseline agent — deliberately minimal. This is the file you are expected to improve.
+"""Baseline agent — the naive ReAct-over-bash loop, kept for A/B.
 
 It reads task.md, then loops: ask the model what to do, run the bash commands it
 requests inside the workspace, feed back the output. It stops when the model
 replies without requesting a command, or after MAX_TURNS.
 
-It is deliberately naive. Diagnosing its weaknesses — where the tokens go,
-where the mistakes come from — is part of the assignment.
+It works, but it is expensive (data is cat-ed into context) and it trusts the
+model to decide when the work is done. `agent/run.py` is the rewritten agent.
 
-Contract you must preserve (the runner depends on it):
+Runner contract:
   - invoked as `python -m agent.run --task-dir <dir> --model <model>`
   - operates only inside <dir>/workspace
-  - talks ONLY to the pinned Claude model, served via OpenRouter, using the
-    key in $OPENROUTER_API_KEY
+  - talks to Claude Haiku 4.5 via OpenRouter, using $OPENROUTER_API_KEY
   - appends one JSON line per API call to $GAUNTLET_USAGE_LOG:
     {"input_tokens": N, "output_tokens": N, "cache_write_tokens": N,
      "cache_read_tokens": N}
-    (keep this honest — grading cross-checks it against the OpenRouter ledger)
 """
 
 import argparse

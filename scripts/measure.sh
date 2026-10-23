@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Measurement harness for the Agent Gauntlet take-home.
+# Measurement harness for nickel-agent.
 #
 #   scripts/measure.sh smoke      # 1 task, sanity check
 #   scripts/measure.sh ab         # baseline vs new, one task per category + held-out
-#   scripts/measure.sh visible    # full visible suite x3 (gate: 10/10 SOLVED each)
+#   scripts/measure.sh visible    # full practice suite x3 (gate: 10/10 SOLVED each)
 #   scripts/measure.sh heldout    # held-out suite x3
 #   scripts/measure.sh all        # ab -> visible -> heldout
 #

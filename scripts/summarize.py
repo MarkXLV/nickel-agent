@@ -5,7 +5,7 @@ Usage: python scripts/summarize.py results1.json [results2.json ...]
 
 Prints per-task status and an aggregate: solve rate, total spend, and
 cost-per-solve (total dollars across ALL tasks / distinct tasks solved) — the
-same efficiency metric the grader uses.
+same efficiency metric used in the results table (total spend / tasks solved).
 """
 import json
 import sys

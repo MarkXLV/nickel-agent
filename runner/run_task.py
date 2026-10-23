@@ -6,8 +6,8 @@ Runs your agent against one or more tasks, then verifies the results.
     python -m runner.run_task tasks/01-csv-merge-basic
     python -m runner.run_task tasks/*
 
-CANDIDATES: this file is off-limits. Grading uses this exact runner; if you
-change it, your local results will not match your graded results.
+This runner is the evaluation harness. Keep it stable so local numbers
+match the usage log the agent writes.
 
 Contract:
   - The agent is invoked as `python -m agent.run --task-dir <run_dir> --model <model>`
@@ -35,8 +35,7 @@ DEFAULT_TIMEOUT = 600  # seconds, per task
 DEFAULT_TASK_BUDGET = 0.05  # dollars; a task is SOLVED only if it passes within this
 VERIFY_TIMEOUT = 180
 
-# $/MTok, for the candidate-facing cost estimate (longest prefix wins).
-# Grading recomputes cost authoritatively; this is the same arithmetic.
+# $/MTok, for the on-the-fly cost estimate (longest prefix wins).
 PRICES = {
     "anthropic/claude-haiku-4.5": (1.00, 5.00),
     "anthropic/claude-sonnet-4.5": (3.00, 15.00),

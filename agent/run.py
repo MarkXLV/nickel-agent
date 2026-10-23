@@ -1,6 +1,6 @@
-"""Agent Gauntlet agent — rewritten for correctness, cost, and reliability.
+"""nickel-agent — script-first coding agent for cheap, reliable file tasks.
 
-Strategy (see understanding.md / WRITEUP.md for the full rationale):
+Strategy:
   - The model NEVER transforms data in-context. It writes one small Python
     program that reads/writes the workspace files on disk with real parsers
     (csv / json / pandas), runs it, then cheaply verifies its own output
@@ -12,19 +12,17 @@ Strategy (see understanding.md / WRITEUP.md for the full rationale):
   - A dense "operator playbook" system prompt encodes the recurring execution
     traps (exact value preservation, sort semantics, redact-only-true-PII,
     no stray files, encodings, rounding/timezone) so it generalizes to unseen
-    tasks rather than memorizing the visible ones.
+    tasks rather than memorizing the practice ones.
   - A self-verification gate: the loop will not accept "done" until the model
     has actually run and checked its work (one nudge if it tries to stop early).
 
-Contract preserved from the baseline (the runner depends on it):
+Runner contract:
   - invoked as `python -m agent.run --task-dir <dir> --model <model>`
   - operates only inside <dir>/workspace
-  - talks ONLY to the pinned Claude model, served via OpenRouter, using the
-    key in $OPENROUTER_API_KEY
+  - talks to Claude Haiku 4.5 via OpenRouter, using $OPENROUTER_API_KEY
   - appends one JSON line per API call to $GAUNTLET_USAGE_LOG:
     {"input_tokens": N, "output_tokens": N, "cache_write_tokens": N,
      "cache_read_tokens": N}
-    (kept honest — grading cross-checks it against the OpenRouter ledger)
 """
 
 import argparse

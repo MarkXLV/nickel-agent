@@ -1,7 +1,7 @@
 [project]
-name = "agent-gauntlet-takehome"
+name = "nickel-agent"
 version = "0.1.0"
-description = "Agent Gauntlet candidate kit"
+description = "A cheap, reliable coding agent for file-wrangling, PII redaction, and reconciliation tasks."
 requires-python = ">=3.12"
 dependencies = [
     "openai>=1.50",
